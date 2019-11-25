@@ -28,6 +28,10 @@ new Metalsmith(__dirname)
 
     When a link is to a folder, the plugin will automatically attempt to scan for an index file with this name.
 
+- **`metadata`** `Object`, default `{}`
+
+    Sets these metadata properties on the destination file. Useful for template systems, file processing filters, etc.
+
 - **`src`** `String|Array<String>`, default `index.html`
 
     Files to be included in the book as a starting point. All local links within the book are scanned as well.

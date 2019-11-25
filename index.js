@@ -80,10 +80,15 @@ module.exports = (options) => {
     options = pluginKit.defaultOptions({
         dest: 'book.html',
         indexFile: 'index.html',
+        metadata: {},
         src: [ 'index.html' ]
     }, options);
 
     options.src = [].concat(options.src);
+
+    if (typeof options.metadata !== 'object') {
+        options.metadata = {};
+    }
 
     return pluginKit.middleware({
         before: (files) => {
@@ -107,6 +112,12 @@ module.exports = (options) => {
 
             debug(`adding combined content as file: ${options.dest}`);
             pluginKit.addFile(files, options.dest, content);
+
+            if (options.metadata) {
+                for (const [key, value] of Object.entries(options.metadata)) {
+                    files[options.dest][key] = value;
+                }
+            }
         }
     });
 }
