@@ -1,11 +1,11 @@
 {
     "name": "metalsmith-bookify-html",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Turn a collection of separate HTML files into one. Adjusts links between pages and updates image elements.",
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url":  "git+https://github.com/fidian/metalsmith-bookify-html.git"
+        "url": "git+https://github.com/fidian/metalsmith-bookify-html.git"
     },
     "keywords": [
         "metalsmith",
