@@ -9,7 +9,7 @@ function absoluteLinkToTarget(filename, href) {
     }
 
     if (href.indexOf('://') >= 0) {
-        return ref;
+        return href;
     }
 
     return urijs(href).absoluteTo('/' + filename).toString();
