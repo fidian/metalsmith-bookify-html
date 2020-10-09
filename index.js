@@ -8,7 +8,7 @@ function absoluteLinkToTarget(filename, href) {
         return href;
     }
 
-    if (href.indexOf('://') >= 0) {
+    if (href.indexOf('://') >= 0 || href.indexOf('mailto:') === 0) {
         return href;
     }
 
@@ -31,6 +31,11 @@ function processHtml(filename, file, toInclude, dest, files, indexFile) {
     $('a[href]').each((index, element) => {
         const link = $(element).attr('href');
         const target = absoluteLinkToTarget(filename, link);
+
+        if (target.indexOf('://') >= 0 || target.indexOf('mailto:') === 0) {
+            return;
+        }
+
         const targetFilename = getFilename(files, target, indexFile);
         debug(`found href: ${link} -> ${targetFilename}`);
         $(element).attr('href', '#' + targetFilename);
@@ -55,6 +60,10 @@ function processHtml(filename, file, toInclude, dest, files, indexFile) {
 function getFilename(files, name, indexFile) {
     while (name.charAt(0) === '/') {
         name = name.substr(1);
+    }
+
+    if (name.indexOf('#') >= 0) {
+        name = name.split('#')[0];
     }
 
     if (files[name]) {
