@@ -72,7 +72,7 @@ function getFilename(files, name, indexFile) {
 
     let indexName = name;
 
-    if (indexName.charAt(indexName.length - 1) !== '/') {
+    if (indexName && indexName.charAt(indexName.length - 1) !== '/') {
         indexName += '/';
     }
 
