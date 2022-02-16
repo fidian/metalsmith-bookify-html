@@ -1,6 +1,6 @@
 {
     "name": "metalsmith-bookify-html",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Turn a collection of separate HTML files into one. Adjusts links between pages and updates image elements.",
     "main": "index.js",
     "repository": {
@@ -22,7 +22,7 @@
     "dependencies": {
         "cheerio": "^1.0.0-rc.10",
         "debug": "^4.3.3",
-        "metalsmith-plugin-kit": "^1.2.0",
-        "urijs": "^1.19.7"
+        "metalsmith-plugin-kit": "^1.2.2",
+        "urijs": "^1.19.8"
     }
 }
