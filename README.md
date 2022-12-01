@@ -24,13 +24,17 @@ new Metalsmith(__dirname)
 
     Where the file will be written.
 
-- **`indexFile`** `String`, default `index.html`
+- **`indexFile`** `String` or `String[]`, default `["index.html", "index.md"]`
 
-    When a link is to a folder, the plugin will automatically attempt to scan for an index file with this name.
+    When a link is to a folder, the plugin will automatically attempt to scan for an index file with these names. Even though the name could end in `.md`, it must be an HTML file.
 
 - **`metadata`** `Object`, default `{}`
 
     Sets these metadata properties on the destination file. Useful for template systems, file processing filters, etc.
+
+- **`selector`** `String`, default `body`
+
+    The CSS selector to use for finding the content to append. The target element will not be included, just its `innerHTML`.
 
 - **`src`** `String|Array<String>`, default `index.html`
 

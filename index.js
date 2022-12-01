@@ -24,7 +24,7 @@ function getContents(filename, file) {
     return `<a name="${filename}"></a>${contents}`;
 }
 
-function processHtml(filename, file, toInclude, dest, files, indexFile) {
+function processHtml(filename, file, toInclude, dest, files, indexFile, selector) {
     let contents = getContents(filename, file);
     const $ = cheerio.load(contents);
 
@@ -54,7 +54,7 @@ function processHtml(filename, file, toInclude, dest, files, indexFile) {
         $(element).attr('src', updatedRef);
     });
 
-    return $.html();
+    return $.html(selector);
 }
 
 function getFilename(files, name, indexFile) {
@@ -76,10 +76,10 @@ function getFilename(files, name, indexFile) {
         indexName += '/';
     }
 
-    indexName += indexFile;
-
-    if (files[indexName]) {
-        return indexName;
+    for (const name of indexFile) {
+        if (files[indexName + name]) {
+            return indexName + name;
+        }
     }
 
     return null;
@@ -88,11 +88,12 @@ function getFilename(files, name, indexFile) {
 module.exports = (options) => {
     options = pluginKit.defaultOptions({
         dest: 'book.html',
-        indexFile: 'index.html',
+        indexFile: ['index.html', 'index.md'],
         metadata: {},
         src: [ 'index.html' ]
     }, options);
 
+    options.indexFile = [].concat(options.indexFile);
     options.src = [].concat(options.src);
 
     if (typeof options.metadata !== 'object') {
@@ -112,7 +113,7 @@ module.exports = (options) => {
                     processed[filename] = true;
                     const file = files[filename];
                     debug(`processing file: ${filename}`);
-                    content += processHtml(src, file, toInclude, options.dest, files, options.indexFile);
+                    content += processHtml(src, file, toInclude, options.dest, files, options.indexFile, options.selector);
                 } else if (!filename && !processed[src]) {
                     processed[src] = true;
                     debug(`file not found: ${src}`);
